@@ -73,9 +73,9 @@ class User
      */
     static public function login($name, $password)
     {
-        $prep_query = User::$mysql->prepare("SELECT user_id FROM `users` WHERE `user_name`=? AND `user_password`=? LIMIT 1")
+        $prep_query = User::$mysql->prepare("SELECT user_id FROM `users` WHERE `user_name`=? AND `user_password`=MD5(?) LIMIT 1")
         or die('MySQL Error. Error[' . User::$mysql->errno . ']: ' . User::$mysql->error);
-        $prep_query->bind_param("ss", $name, md5($password));
+        $prep_query->bind_param("ss", $name, $password);
         $prep_query->execute();
         $result = $prep_query->get_result();
         $arr = $result->fetch_assoc();
@@ -131,6 +131,22 @@ class User
             $result = $result->fetch_assoc();
             $prep_query->free_result();
             return $result;
+        } else {
+            $prep_query->free_result();
+            return false;
+        }
+    }
+
+    static public function set_language($session, $language)
+    {
+        $prep_query = User::$mysql->prepare("UPDATE users SET `user_language`=? WHERE `user_session`=?")
+        or die('MySQL Error. Error[' . User::$mysql->errno . ']: ' . User::$mysql->error);
+        $prep_query->bind_param("ss", $language, $session);
+        $prep_query->execute();
+        $prep_query->store_result();
+        if ($prep_query->affected_rows > 0) {
+            $prep_query->free_result();
+            return true;
         } else {
             $prep_query->free_result();
             return false;

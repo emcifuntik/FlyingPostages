@@ -19,7 +19,8 @@
     }
   ],
   "require": {
-    "robloach/component-installer": "*"
+    "robloach/component-installer": "*",
+    "twbs/bootstrap": "v4.0.0-alpha"
   },
   "extra": {
     "component": {

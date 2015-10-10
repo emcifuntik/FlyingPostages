@@ -46,8 +46,7 @@ class Template
 
     public function load_block($_blockname)
     {
-        preg_match("/{BLOCK:BEGIN:" . $_blockname . "}((.|\n)*){BLOCK:END:" . $_blockname . "}/", $this->template_text, $matches);
-
+        preg_match("#\{BLOCK:BEGIN:" . $_blockname . "\}(.+?)\{BLOCK:END:" . $_blockname . "\}#si", $this->template_text, $matches);
         if (isset($matches[1])) {
             $blocktext = $matches[1];
         } else $blocktext = false;
@@ -56,7 +55,7 @@ class Template
 
     public function replace_block($_blockname, $_content)
     {
-        $this->template_text = preg_replace("/{BLOCK:BEGIN:" . $_blockname . "}((.|\n)*){BLOCK:END:" . $_blockname . "}/",
+        $this->template_text = preg_replace("#\{BLOCK:BEGIN:" . $_blockname . "\}(.+?)\{BLOCK:END:" . $_blockname . "\}#si",
             $_content,
             $this->template_text);
     }

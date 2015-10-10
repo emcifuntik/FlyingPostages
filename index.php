@@ -4,20 +4,16 @@
  * @date: 21-Apr-15
  * @time: 06:12
  */
-require_once "lib/include/Get.php";
-require_once "lib/include/Request.php";
-require_once "lib/include/Template.php";
-require_once "lib/include/Locale.php";
+require "lib/lib.php";
 
 $content = "";
 $action = isset($GET->action) ? $GET->action : "main";
 switch ($action) {
     case "main":
-        $mainTemplate = new \Base\Template("template/", "index.tpl");
-        $tempText = $mainTemplate->finish();
-        $mainLocale = new \Base\Locale($tempText);
-        $mainLocale->loadLocale("localization/ru_RU.lng");
-        die($mainLocale->localize());
+        include "pages/main.php";
+        break;
+    case "change_language":
+        include "pages/change_language.php";
         break;
     case "login":
         if (isset($GET->query)) include "pages/login_query.php";
@@ -30,6 +26,9 @@ switch ($action) {
     case "user_edit":
         if (isset($GET->query)) include "pages/user_edit_query.php";
         else include "pages/user_edit.php";
+        break;
+    case "logout":
+        include "pages/logout.php";
         break;
     default:
         include "pages/default.php";
