@@ -6,9 +6,7 @@
  * Time: 6:55
  */
 
-namespace Base;
-
-class Locale
+class Localization
 {
     private $locale_text;
     private $locale_sets;
@@ -37,12 +35,5 @@ class Locale
             $this->locale_text = str_replace("{LOCALE:" . $item . "}", $this->locale_array[$item], $this->locale_text, $count);
         }
         return $this->locale_text;
-    }
-
-    public function set_value($_alias, $_value)
-    {
-        $count = 0;
-        $this->template_text = str_replace("{VALUE:" . $_alias . "}", $_value, $this->template_text, $count);
-        return $count;
     }
 }

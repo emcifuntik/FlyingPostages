@@ -15,7 +15,7 @@
     <link href="{VALUE:PATH}dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="{VALUE:PATH}bower_components/morrisjs/morris.css" rel="stylesheet">
     <link href="{VALUE:PATH}bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{VALUE:PATH}dist/js/jquery.min.js"></script>
     <script src="{VALUE:PATH}bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{VALUE:PATH}bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="{VALUE:PATH}bower_components/raphael/raphael-min.js"></script>
@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Flying Parcels</a>
+            <a class="navbar-brand" href="index.php">Flying Parcels</a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
@@ -99,36 +99,52 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="index.html"><i class="fa fa-home fa-fw"></i> {LOCALE:DASHBOARD}</a>
+                        <a href="index.php"><i class="fa fa-home fa-fw"></i> {LOCALE:DASHBOARD}</a>
                     </li>
+                    {TABS:BEGIN:new_label,my_labels,refund}
                     <li>
                         <a href="#"><i class="fa fa-plane fa-fw"></i> {LOCALE:PARCELS}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            {TAB:BEGIN:new_label}
                             <li>
-                                <a href="index.php?tab=new_label">{LOCALE:NEW_PARCEL}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:NEW_PARCEL}</a>
                             </li>
+                            {TAB:END:new_label}
+                            {TAB:BEGIN:my_labels}
                             <li>
-                                <a href="index.php?tab=my_labels">{LOCALE:MY_PARCELS}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:MY_PARCELS}</a>
                             </li>
+                            {TAB:END:my_labels}
+                            {TAB:BEGIN:refunds}
                             <li>
-                                <a href="morris.html">{LOCALE:REFUNDS}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:REFUNDS}</a>
                             </li>
+                            {TAB:END:refunds}
                         </ul>
                     </li>
+                    {TABS:END:new_label,my_labels,refund}
+                    {TABS:BEGIN:users,settings,statistics}
                     <li>
                         <a href="#"><i class="fa fa-lightbulb-o fa-fw"></i> {LOCALE:ADMIN}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            {TAB:BEGIN:users}
                             <li>
-                                <a href="flot.html">{LOCALE:USERS}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:USERS}</a>
                             </li>
+                            {TAB:END:users}
+                            {TAB:BEGIN:settings}
                             <li>
-                                <a href="morris.html">{LOCALE:SETTINGS}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:SETTINGS}</a>
                             </li>
+                            {TAB:END:settings}
+                            {TAB:BEGIN:statistics}
                             <li>
-                                <a href="morris.html">{LOCALE:STATISTICS}</a>
+                                <a href="{VALUE:TAB_LINK}">{LOCALE:STATISTICS}</a>
                             </li>
+                            {TAB:END:statistics}
                         </ul>
                     </li>
+                    {TABS:END:users,settings,statistics}
                     <li>
                         <a href="#"><i class="fa fa-shield fa-fw"></i> {LOCALE:SUPPORT}</a>
                     </li>
