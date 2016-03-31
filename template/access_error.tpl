@@ -1,0 +1,1 @@
+<h1>{LOCALE:HAVE_NO_ACCESS}</h1>
